@@ -1,0 +1,449 @@
+//based on chart 
+var divider = "-------------------------------------------------------";
+var end_potion;
+
+function in_list(list,elem){
+    var counter=0;
+    for(var i=0;i<list.length;i++){
+        if(list[i]!=elem){
+            counter+=1
+        }
+    }
+    if(counter==list.length){
+        return false
+    }else{
+        return true
+    }
+}
+
+function invalid_add(){
+    println("Invalid option");
+    add = readLine("Select one of the above ingredients to add: ");
+}
+
+function add_ingredient(umph){
+    ingredients.push(add);
+    println(divider);
+    println("Your ingredients: "+ingredients);
+    if(umph!=1){
+        println("Your end result: "+end_potion);
+    }
+    
+}
+
+function only_1_option(detect,new_end_res){
+    println(detect);
+    println(divider);
+    
+    get_ingredient()
+    
+    while(add!=detect && add!=""){
+        invalid_add();
+    }
+    
+    if(add==detect){
+        end_potion=new_end_res;
+    }
+}
+
+function add_and_divider(){
+    add_ingredient();
+    println(divider);
+}
+
+function slowness_potion(){
+    end_potion = "Potion of Slowness (-15%; 1:30)"
+    add_ingredient();
+
+    println(divider)
+    println("Redstone Dust,Glowstone Dust");
+    println(divider);
+
+    get_ingredient()
+
+    while(add!="Redstone Dust" && add!="Glowstone Dust" && add!=""){
+        invalid_add();
+    }
+
+    if(add=="Redstone Dust"){
+        end_potion = "Potion of Slowness + (-15%; 4:00)"
+    }else if(add=="Glowstone Dust"){
+        end_potion = "Potion of Slowness IV (-60%; 0:20)"
+    }
+}
+
+function get_ingredient(){
+    println("(Press enter if you do not want to add anything.)");
+    add=readLine("Select one of the above ingredients to add: ");
+}
+
+function harming_potion(){
+    end_potion="Potion of Harming (-3 hearts)";
+    add_and_divider();
+    
+    println("Glowstone Dust");
+    println(divider);
+    
+    get_ingredient();
+    
+    while(add!="Glowstone Dust" && add!=""){
+        invalid_add();
+    }
+    
+    if(add=="Glowstone Dust"){
+        end_potion="Potion of Harming II (-6 hearts)";
+    }
+}
+
+var tier_1 = ["Nether Wart","Fermented Spider Eye"];
+println(tier_1);
+println(divider);
+
+var ingredients = [];
+var add = readLine("Select one of the above ingredients to add: ");
+
+var good = in_list(tier_1,add);
+while(good==false){
+    invalid_add()
+    good = in_list(tier_1,add);
+    }
+
+add_ingredient(1);
+    
+if(add == "Fermented Spider Eye"){
+    end_potion = "Potion of Weakness (-0.5 Attack Damage; 1:30)";
+    println("Your end result: "+end_potion);
+    println(divider);
+    println("Redstone Dust");
+    println(divider);
+    get_ingredient();
+    
+    while(add!="Redstone Dust" && add!=""){
+        invalid_add()
+    }
+    
+    if(add=="Redstone Dust"){
+        end_potion = "Potion of Weakness (-0.5 Attack Damage; 4:00)"
+    }
+}else{
+    end_potion = "Awkward Potion";
+    println("Your end result: "+end_potion);
+    
+    println(divider);
+    var tier_2 = ["Sugar","Rabbit's Foot","Blaze Powder","Glistering Melon","Spider Eye","Ghast Tear","Magma Cream","Pufferfish","Golden Carrot","Turtle Shell","Phantom Membrane"];
+    println(tier_2);
+    
+    println(divider);
+    add = readLine("Select one of the above ingredients to add: ");
+    
+    good = in_list(tier_2,add);
+    while(good==false){
+        invalid_add();
+        good = in_list(tier_2,add);
+    }
+    
+    if(add=="Sugar"){
+    
+        end_potion = "Potion of Swiftness (+20%; 3:00)";
+        add_and_divider();
+    
+        println("Fermented Spider Eye,Glowstone Dust,Redstone Dust");
+        println(divider);
+    
+        get_ingredient()
+
+        while(add!="Fermented Spider Eye" && add!="Glowstone Dust" && add!="Redstone Dust" && add!=""){
+            invalid_add();
+        }
+
+        if(add=="Glowstone Dust"){
+            end_potion = "Potion of Swiftness II (+40%; 1:30)";
+        }else if(add=="Redstone Dust"){
+            end_potion = "Potion of Swiftness (+20%; 8:00)";
+            add_ingredient();
+
+            println(divider);
+            println("Fermented Spider Eye")
+            println(divider);
+
+            get_ingredient()
+
+            while(add!="Fermented Spider Eye" && add!=""){
+                invalid_add();
+            }
+
+            if(add=="Fermented Spider Eye"){
+                end_potion = "Potion of Slowness + (-15&; 4:00)";
+            }
+        }else if(add=="Fermented Spider Eye"){
+            
+            slowness_potion();
+
+    
+        }
+
+    }else if(add=="Rabbit's Foot"){
+    
+        end_potion = "Potion of Leaping (+1/2; 3:00)";
+        add_and_divider();
+    
+        println("Fermented Spider Eye,Redstone Dust,Glowstone Dust");
+        println(divider);
+    
+        get_ingredient()
+    
+        while(add!="Fermented Spider Eye" && add!="Redstone Dust" && add!="Glowstone Dust" && add!=""){
+            invalid_add();
+        }
+    
+        if(add=="Redstone Dust"){
+            end_potion = "Potion of Leaping + (+1/2; 8:00)";
+            add_ingredient();
+    
+            println(divider);
+            println("Fermented Spider Eye");
+            println(divider);
+    
+            get_ingredient()
+    
+            while(add!="Fermented Spider Eye" && add!=""){
+                invalid_add();
+            }
+    
+            if(add=="Fermented Spider Eye"){
+                end_potion = "Potion of Slowness + (-15%; 4:00)";
+            }
+    
+        }else if(add=="Glowstone Dust"){
+            end_potion = "Potion of Leaping II (+1(1/4); 1:30)";
+        }else if(add=="Fermented Spider Eye"){
+            slowness_potion();
+        }
+    
+    }else if(add == "Blaze Powder"){
+    
+        end_potion = "Potion of Strength (+1.5 hearts; 3:00)";
+        add_and_divider();
+    
+        println("Redstone Dust ,Glowstone Dust");
+        println(divider);
+    
+        get_ingredient()
+    
+        while(add!="Redstone Dust" && add!="Glowstone Dust" && add!=""){
+            invalid_add();
+        }
+    
+        if(add=="Redstone Dust"){
+            end_potion = "Potion of Strength + (+1.5 hearts; 8:00)";
+        }else if(add=="Glowstone Dust"){
+            end_potion = "Potion of Strength II (+3 hearts; 1:30)";
+        }
+    
+    }else if(add=="Glistering Melon"){
+    
+        end_potion = "Potion of Healing (+2 hearts)";
+        add_and_divider();
+    
+        println("Fermented Spider Eye,Glowstone Dust");
+        println(divider);
+    
+        get_ingredient();
+        while(add!="Fermented Spider Eye" && add!="Glowstone Dust" && add!=""){
+            invalid_add();
+        }
+    
+        if(add=="Glowstone Dust"){
+            end_potion = "Potion of Healing II (+4 hearts)";
+            add_and_divider();
+            
+            println("Fermented Spider Eye");
+            println(divider);
+   
+            get_ingredient();
+    
+            while(add!="Fermented Spider Eye" && add!=""){
+                invalid_add();
+            }
+
+            if(add=="Fermented Spider Eye"){
+                end_potion="Potion of Harming II (-6 hearts)";
+            }
+        }else if(add=="Fermented Spider Eye"){
+            harming_potion();
+        }
+    
+    }else if(add=="Spider Eye"){
+
+        end_potion = "Potion of Poison (-0.5 hearts/2.5s; 0:45)";
+        add_and_divider();
+    
+        println("Fermented Spider Eye,Glowstone Dust,Redstone Dust");
+        println(divider)
+    
+        get_ingredient();
+  
+        while(add!="Fermented Spider Eye" && add!="Glowstone Dust" && add!="Redstone Dust" && add!=""){
+            invalid_add();
+        }
+
+        if(add=="Glowstone Dust"){
+            end_potion="Potion of Poison II (-0.5 heats/1.2s; 0:21)";
+            add_and_divider();
+  
+            println("Fermented Spider Eye");
+            println(divider);
+   
+            get_ingredient();
+ 
+            while(add!="Fermented Spider Eye" &&  add!=""){
+                invalid_add();
+            } 
+  
+            if(add=="Fermented Spider Eye"){
+                end_potion="Potion of Harming II (-6 hearts)";
+            }
+   
+        }else if(add=="Redstone Dust"){
+            end_potion="Potion of Poison + (-0.5 hearts/2.5s; 1:30)";
+        }else if(add=="Fermented Spider Eye"){
+ 
+            harming_potion();
+        }
+ 
+    }else if(add=="Ghast Tear"){
+    
+        add_and_divider();
+        end_potion = "Potion of Regeneration (+0.5 hearts/2.5s; 0:45)";
+    
+        println("Redstone Dust,Glowstone Dust");
+        println(divider);
+    
+        get_ingredient();
+    
+        while(add!="Redstone Dust" && add!="Glowstone Dust" && add!=""){
+            invalid_add();
+        }
+    
+        if(add=="Redstone Dust"){
+            end_potion="Potion of Regeneration (+0.5 hearts/2.5s; 1:30)"
+        }else if(add=="Glowstone Dust"){
+            end_potion="Potion of Regeneration II (+0.5 hearts/1.2s; 0:22)";
+        }
+   
+    }else if(add=="Magma Cream"){
+    
+        end_potion = "Potion of Fire Resistance (3:00)";
+        add_and_divider();
+    
+        only_1_option("Redstone Dust","Potion of Fire Resistance (8:00)");
+
+    }else if(add=="Pufferfish"){
+    
+        end_potion = "Potion of Water Breathing (3:00)";
+        add_and_divider();
+    
+        only_1_option("Redstone Dust","Potion of Water Breathing (8:00)");
+
+    }else if(add=="Golden Carrot"){
+
+        end_potion = "Potion of Night Vision (3:00)";
+        add_and_divider();
+
+        println("Redstone Dust,Fermented Spider Eye");
+        println(divider);
+    
+        get_ingredient()
+        while(add!="Redstone Dust" && add!="Fermented Spider Eye" && add!=""){
+            invalid_add();
+        }
+
+        if(add=="Redstone Dust"){
+            end_potion = "Potion of Night Vision (8:00)"
+        }else if(add=="Fermented Spider Eye"){
+            ingredients.push(add);
+            end_potion = "Potion of Invisibility (3:00)"
+   
+            println(divider);
+    
+            only_1_option("Redstone Dust","Potion of Invisibility (8:00)");
+        }
+
+    }else if(add=="Turtle Shell"){
+    
+        end_potion = "Potion of the Turtle Master (Slowness IV (0:20); Resistance III (0:20))";
+        add_and_divider();
+    
+        println("Redstone Dust,Glowstone Dust");
+        println(divider);
+    
+        get_ingredient()
+    
+        while(add!="Redstone Dust" && add!="Glowstone Dust" && add!=""){
+            invalid_add();
+        }
+    
+        if(add=="Redstone Dust"){
+            end_potion = "Potion of the Turtle Master + (Slowness IV (0:40); Resistance III (0:40))";
+        }else if(add=="Glowstone Dust"){
+            end_potion = "Potion of the Turtle Master II (Slowness VI (0:20); Resistance IV (0:20))";
+        }
+    
+    }else{ //Phantom Membrane
+    
+        end_potion = "Potion of Slow Falling (1:30)";
+        add_and_divider();
+    
+        only_1_option("Redstone Dust","Potion of Slow Falling (4:00)");
+       
+    }
+}
+add_ingredient();
+println(divider);
+
+println("Adding nothing to your potion will cause it be");
+println("consumed (drunk) in order to take effect.");
+println(divider);
+
+println("Adding <b>Gunpowder</b> to your Potion will make it a <b>Splash</b>");
+println("<b>Potion</b>, and will need to be thrown [at/on a target]");
+println("to take effect.");
+println(divider);
+
+println("Adding <b>Dragon's Breath</b> to a <u>Splash Potion</u> will make it");
+println("a <b>Lingering Potion</b>, and will need to be thrown [at/on");
+println("a target] to take effect <i>but</i> will last in an area of"); 
+println("3 blocks (radius) and reduce to nothing over the course");
+println("of 30 seconds." );
+println(divider);
+
+println("Gunpowder");
+println(divider);
+
+get_ingredient()
+
+while(add!="Gunpowder" && add!=""){
+    invalid_add();
+}
+
+if(add=="Gunpowder"){
+    var pre_splash=end_potion;
+    
+    end_potion="Splash "+end_potion;
+    add_and_divider();
+    
+    println("Dragon's Breath");
+    println(divider);
+    
+    get_ingredient();
+    
+    while(add!="Dragon's Breath" && add!=""){
+        invalid_add();
+    }
+    
+    if(add=="Dragon's Breath"){
+        end_potion="Lingering "+pre_splash;
+    }
+}
+
+add_ingredient();
